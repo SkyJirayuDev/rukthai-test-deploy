@@ -2,6 +2,9 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   target: 'static',
   ssr: false,
+  generate: {
+    dir: 'dist'
+  },
   devtools: { enabled: true },
   css: [
     '@/assets/sass/main.scss'
