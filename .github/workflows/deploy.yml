@@ -20,14 +20,17 @@ jobs:
 
     - name: Enable Corepack and Install Correct Yarn Version
       run: |
-        corepack enable          # เปิดใช้งาน Corepack
-        corepack prepare yarn@4.5.1 --activate  # ติดตั้ง Yarn เวอร์ชัน 4.5.1
+        corepack enable
+        corepack prepare yarn@4.5.1 --activate
 
     - name: Install Dependencies
-      run: yarn install          # ติดตั้ง dependencies จาก package.json
+      run: yarn install
 
     - name: Build Nuxt.js Project
-      run: yarn build            # สร้างไฟล์ static สำหรับ deployment
+      run: yarn build
+
+    - name: Check Build Directory
+      run: ls -la ./dist
 
     - name: Deploy to S3
       env:
