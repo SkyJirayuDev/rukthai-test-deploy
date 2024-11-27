@@ -3,7 +3,7 @@ name: Deploy Nuxt App to AWS S3
 on:
   push:
     branches:
-      - main # เปลี่ยน branch ตามที่ต้องการ
+      - main
 
 jobs:
   deploy:
@@ -18,11 +18,16 @@ jobs:
       with:
         node-version: '16'
 
+    - name: Enable Corepack and Install Correct Yarn Version
+      run: |
+        corepack enable          # เปิดใช้งาน Corepack
+        corepack prepare yarn@4.5.1 --activate  # ติดตั้ง Yarn เวอร์ชัน 4.5.1
+
     - name: Install Dependencies
-      run: yarn install
+      run: yarn install          # ติดตั้ง dependencies จาก package.json
 
     - name: Build Nuxt.js Project
-      run: yarn build
+      run: yarn build            # สร้างไฟล์ static สำหรับ deployment
 
     - name: Deploy to S3
       env:
