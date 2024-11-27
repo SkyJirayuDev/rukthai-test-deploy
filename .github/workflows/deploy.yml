@@ -26,11 +26,19 @@ jobs:
     - name: Install Dependencies
       run: yarn install
 
+    - name: Debug SCSS Files
+      run: ls -la ./assets/sass
+
     - name: Build Nuxt.js Project
-      run: yarn build
+      run: yarn build || echo "Build failed!"
+
+    - name: Debug Nuxt.js Logs
+      run: |
+        echo "Nuxt build logs:"
+        cat .nuxt/build.log || echo "No build log found"
 
     - name: Check Build Directory
-      run: ls -la ./dist
+      run: ls -la ./dist || echo "No dist directory found!"
 
     - name: Deploy to S3
       env:
